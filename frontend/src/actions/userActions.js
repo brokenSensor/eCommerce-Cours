@@ -18,7 +18,7 @@ export const login = (email, password) => async dispatch => {
 		};
 
 		const { data } = await axios.post(
-			'/api/users/login',
+			'/api/user/login',
 			{ email, password },
 			config
 		);
@@ -30,11 +30,12 @@ export const login = (email, password) => async dispatch => {
 
 		localStorage.setItem('userInfo', JSON.stringify(data));
 	} catch (error) {
+		console.log(error.response.data.message);
 		dispatch({
 			type: USER_LOGIN_FAIL,
 			payload:
 				error.response && error.response.data.message
-					? error.response.data.messsage
+					? error.response.data.message
 					: error.message,
 		});
 	}
